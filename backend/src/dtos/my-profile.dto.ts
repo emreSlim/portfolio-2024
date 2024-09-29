@@ -1,24 +1,29 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ProfessionalProfileDTO } from './professional-profile.dto';
-import { LocationDTO } from './location.dto';
+import { IsNotEmpty } from 'class-validator';
+import {
+  About,
+  Email,
+  FirstName,
+  Introduction,
+  LastName,
+  NickName,
+  Phone,
+} from 'src/entities';
 
 export class MyProfileDTO {
+  @IsNotEmpty()
   @ApiProperty()
-  firstName: string;
+  firstName: FirstName;
   @ApiProperty()
-  lastName: string;
+  lastName: LastName;
   @ApiProperty()
-  nickName: string;
+  nickName: NickName;
   @ApiProperty()
-  email: string;
+  email: Email;
   @ApiProperty()
-  phone: string;
+  phone: Phone;
   @ApiProperty()
-  introduction: string;
+  introduction: Introduction;
   @ApiProperty()
-  about: string;
-  @ApiProperty({ type: [ProfessionalProfileDTO] })
-  professionalProfiles: ProfessionalProfileDTO[];
-  @ApiProperty({ type: [LocationDTO] })
-  locations: LocationDTO[];
+  about: About;
 }

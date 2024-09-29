@@ -1,9 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { myProfile } from './my-profile.fixture';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Location, MyProfile, ProfessionalProfile } from 'src/entities';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MyProfileDTO } from 'src/dtos';
+import { GetMyProfile, PostMyProfile, ResProfile } from './my-profile.dto';
 
 @Injectable()
 export class MyProfileService {
@@ -16,45 +15,135 @@ export class MyProfileService {
     private readonly professionalProfileRepo: Repository<ProfessionalProfile>
   ) {}
 
-  getMyProfile = (): MyProfileDTO => myProfile;
-  addMyProfile = async (profile: MyProfileDTO) => {
+  mapResProfileFromEntity(
+    mp: MyProfile,
+    lc: Location[],
+    pp: ProfessionalProfile[]
+  ): ResProfile {
+    return {
+      firstName: mp.first_name,
+      lastName: mp.last_name,
+      nickName: mp.nick_name,
+      about: mp.about,
+      email: mp.email,
+      introduction: mp.introduction,
+      myProfileId: mp.my_profile_id,
+      phone: mp.phone,
+      professionalProfiles: pp.map((p) => {
+        return {
+          platformName: p.platform_name,
+          professionalProfileId: p.professional_profile_id,
+          url: p.url,
+        };
+      }),
+      locations: lc.map((l) => {
+        return {
+          locationType: l.location_type,
+          city: l.city,
+          country: l.country,
+          locationId: l.location_id,
+          state: l.state,
+        };
+      }),
+    };
+  }
+
+  async getMyProfile(query: GetMyProfile.Query): Promise<ResProfile> {
+    const mp = await this.myProfileRepo.findOneBy({
+      my_profile_id: query.profileId,
+    });
+    if (mp == null) {
+      throw new HttpException('Profile not found', HttpStatus.BAD_REQUEST);
+    }
+
+    const lc = await this.locationRepo.findBy({
+      my_profile_id: query.profileId,
+    });
+    const pp = await this.professionalProfileRepo.findBy({
+      my_profile_id: query.profileId,
+    });
+
+    return this.mapResProfileFromEntity(mp, lc, pp);
+  }
+
+  async addMyProfile(body: PostMyProfile.ReqBody): Promise<ResProfile> {
     const myProfile: MyProfile = {
-      first_name: profile.firstName,
-      last_name: profile.lastName,
-      nick_name: profile.nickName,
-      email: profile.email,
-      phone: profile.phone,
-      about: profile.about,
-      introduction: profile.introduction,
+      first_name: body.firstName,
+      last_name: body.lastName,
+      nick_name: body.nickName,
+      email: body.email,
+      phone: body.phone,
+      about: body.about,
+      introduction: body.introduction,
     };
 
-    const savedMyProfile = await this.myProfileRepo.save(myProfile);
+    const mp = await this.myProfileRepo.save(myProfile);
 
-    const locations: Location[] = profile.locations.map((lo) => {
+    const locations: Location[] = body.locations.map((lo) => {
       return {
+        my_profile_id: mp.my_profile_id,
         city: lo.city,
         country: lo.country,
         state: lo.state,
         location_type: lo.locationType,
-        my_profile_id: savedMyProfile.my_profile_id,
       };
     });
 
-    await this.locationRepo.save(locations);
+    const lc = await this.locationRepo.save(locations);
 
-    const proProfiles: ProfessionalProfile[] = profile.professionalProfiles.map(
+    const proProfiles: ProfessionalProfile[] = body.professionalProfiles.map(
       (pp) => {
         return {
-          my_profile_id: savedMyProfile.my_profile_id,
+          my_profile_id: mp.my_profile_id,
           platform_name: pp.platformName,
           url: pp.url,
         };
       }
     );
 
-    await this.professionalProfileRepo.save(proProfiles);
+    const pp = await this.professionalProfileRepo.save(proProfiles);
 
-    return savedMyProfile;
-  };
-  updateMyProfile = () => {};
+    return this.mapResProfileFromEntity(mp, lc, pp);
+  }
+  async updateMyProfile(body: ResProfile) {
+    const myProfile: MyProfile = {
+      my_profile_id: body.myProfileId,
+      first_name: body.firstName,
+      last_name: body.lastName,
+      nick_name: body.nickName,
+      email: body.email,
+      phone: body.phone,
+      about: body.about,
+      introduction: body.introduction,
+    };
+    const mp = await this.myProfileRepo.save(myProfile);
+
+    const locations: Location[] = body.locations.map((lo) => {
+      return {
+        my_profile_id: mp.my_profile_id,
+        location_id: lo.locationId,
+        city: lo.city,
+        country: lo.country,
+        state: lo.state,
+        location_type: lo.locationType,
+      };
+    });
+
+    const lc = await this.locationRepo.save(locations);
+
+    const proProfiles: ProfessionalProfile[] = body.professionalProfiles.map(
+      (pp) => {
+        return {
+          my_profile_id: mp.my_profile_id,
+          professional_profile_id: pp.professionalProfileId,
+          platform_name: pp.platformName,
+          url: pp.url,
+        };
+      }
+    );
+
+    const pp = await this.professionalProfileRepo.save(proProfiles);
+
+    return this.mapResProfileFromEntity(mp, lc, pp);
+  }
 }

@@ -1,12 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { City, Country, LocationType, State } from 'src/entities';
 
 export class LocationDTO {
   @ApiProperty()
-  city: string;
+  city: City;
   @ApiProperty()
-  state: string;
+  state: State;
   @ApiProperty()
-  country: string;
+  country: Country;
   @ApiProperty()
-  locationType: 'current' | 'permanent';
+  locationType: LocationType;
 }

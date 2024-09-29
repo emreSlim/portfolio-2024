@@ -1,5 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
+export type Country = string & { readonly brand: unique symbol };
+export type City = string & { readonly brand: unique symbol };
+export type State = string & { readonly brand: unique symbol };
+export type LocationType = 'current' | 'permanent';
+
 @Entity({
   name: 'location',
 })
@@ -10,16 +15,16 @@ export class Location {
   location_id?: number;
 
   @Column({ type: 'varchar', length: 20 })
-  city: string;
+  city: City;
 
   @Column({ type: 'varchar', length: 20 })
-  state: string;
+  state: State;
 
   @Column({ type: 'varchar', length: 20 })
-  country: string;
+  country: Country;
 
   @Column({ type: 'varchar', length: 20 })
-  location_type: 'current' | 'permanent';
+  location_type: LocationType;
 
   @Column({
     type: 'int',
