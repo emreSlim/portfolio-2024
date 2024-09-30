@@ -4,14 +4,34 @@ import { MyProfileModule } from './modules/my-profile/my-profile.module';
 import { ContactRequestModule } from './modules/contact-request/contact-request.module';
 import { ContactPersonModule } from './modules/contact-person/contact-person.module';
 import { Postgre } from './postgre.module';
-import { Location, MyProfile, ProfessionalProfile } from './entities';
+import {
+  Experience,
+  Location,
+  MyProfile,
+  ProfessionalProfile,
+  Project,
+  Skill,
+} from './entities';
+import { SkillModule } from './modules/skill/skill.module';
+import { ProjectModule } from './modules/project/project.module';
+import { ExperienceModule } from './modules/experience/experience.module';
 
 @Module({
   imports: [
-    Postgre.getModule([MyProfile, Location, ProfessionalProfile]),
+    Postgre.getModule([
+      MyProfile,
+      Location,
+      ProfessionalProfile,
+      Experience,
+      Skill,
+      Project,
+    ]),
     MyProfileModule,
     ContactRequestModule,
     ContactPersonModule,
+    SkillModule,
+    ProjectModule,
+    ExperienceModule,
   ],
 })
 export class AppModule {}
