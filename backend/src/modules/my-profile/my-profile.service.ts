@@ -2,7 +2,8 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Location, MyProfile, ProfessionalProfile } from 'src/entities';
 import { InjectRepository } from '@nestjs/typeorm';
-import { GetMyProfile, PostMyProfile, ResProfile } from './my-profile.dto';
+import { GetMyProfile } from './my-profile.dto';
+import { MyProfileFullDTO, MyProfileFullDTOWithId } from 'src/dtos';
 
 @Injectable()
 export class MyProfileService {
@@ -19,7 +20,7 @@ export class MyProfileService {
     mp: MyProfile,
     lc: Location[],
     pp: ProfessionalProfile[]
-  ): ResProfile {
+  ): MyProfileFullDTOWithId {
     return {
       firstName: mp.first_name,
       lastName: mp.last_name,
@@ -48,7 +49,9 @@ export class MyProfileService {
     };
   }
 
-  async getMyProfile(query: GetMyProfile.Query): Promise<ResProfile> {
+  async getMyProfile(
+    query: GetMyProfile.Query
+  ): Promise<MyProfileFullDTOWithId> {
     const mp = await this.myProfileRepo.findOneBy({
       my_profile_id: query.profileId,
     });
@@ -66,7 +69,7 @@ export class MyProfileService {
     return this.mapResProfileFromEntity(mp, lc, pp);
   }
 
-  async addMyProfile(body: PostMyProfile.ReqBody): Promise<ResProfile> {
+  async addMyProfile(body: MyProfileFullDTO): Promise<MyProfileFullDTOWithId> {
     const myProfile: MyProfile = {
       first_name: body.firstName,
       last_name: body.lastName,
@@ -105,7 +108,7 @@ export class MyProfileService {
 
     return this.mapResProfileFromEntity(mp, lc, pp);
   }
-  async updateMyProfile(body: ResProfile) {
+  async updateMyProfile(body: MyProfileFullDTOWithId) {
     const myProfile: MyProfile = {
       my_profile_id: body.myProfileId,
       first_name: body.firstName,

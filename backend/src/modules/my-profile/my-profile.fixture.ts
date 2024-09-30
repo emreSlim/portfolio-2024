@@ -1,6 +1,6 @@
-import { PostMyProfile } from './my-profile.dto';
+import { MyProfileFullDTO } from 'src/dtos';
 
-export const myProfile: PostMyProfile.ReqBody = {
+export const myProfile: MyProfileFullDTO = {
   nickName: 'Emre',
   firstName: 'Imran',
   lastName: 'Qureshi',
@@ -37,4 +37,4 @@ export const myProfile: PostMyProfile.ReqBody = {
   introduction: `I am a full stack developer. I program and design websites, web apps and native apps using my deep understanding in javaScript and it's libraries React-JS, React-Native, jQuery, bootstrap etc..`,
   about:
     'Hi, my name is Imran and I am from Ghaziabad (UP) India. I have been learning frontend web developing , cross platform app developing , functional and object-oriented programming for last 1+ years and I am so passionate about how I can picture, program and write code and make website and app according to user-story. I always have been curious about how things work and how I can manipulate those processes according to my curiosity. For more details about myself, please check out my resume below.',
-} as PostMyProfile.ReqBody;
+} as MyProfileFullDTO;

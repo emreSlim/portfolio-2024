@@ -7,3 +7,8 @@ export class ProfessionalProfileDTO {
   @ApiProperty()
   url: URL;
 }
+
+export class ProfessionalProfileDTOWithId extends ProfessionalProfileDTO {
+  @ApiProperty()
+  professionalProfileId: number;
+}

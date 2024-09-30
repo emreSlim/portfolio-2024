@@ -11,3 +11,8 @@ export class LocationDTO {
   @ApiProperty()
   locationType: LocationType;
 }
+
+export class LocationDTOWithId extends LocationDTO {
+  @ApiProperty()
+  locationId: number;
+}
