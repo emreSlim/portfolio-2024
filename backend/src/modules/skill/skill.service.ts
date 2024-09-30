@@ -11,23 +11,23 @@ export class SkillService {
     private readonly skillRepo: Repository<Skill>
   ) {}
 
-  mapSkillFromEntity(skill: Skill): SkillDTOWithId {
+  mapSkillFromEntity(entity: Skill): SkillDTOWithId {
     return {
-      name: skill.name,
-      description: skill.description,
-      experienceInMonth: skill.experience_in_month,
-      proficiency: skill.proficiency,
-      proficiencyLevel: skill.proficiency_level,
-      skillId: skill.skill_id,
+      name: entity.name,
+      description: entity.description,
+      experienceInMonth: entity.experience_in_month,
+      proficiency: entity.proficiency,
+      proficiencyLevel: entity.proficiency_level,
+      skillId: entity.skill_id,
     };
   }
 
-  mapSkillToEntity(skill: SkillDTO, entity = new Skill()): Skill {
-    entity.name = skill.name;
-    entity.description = skill.description;
-    entity.experience_in_month = skill.experienceInMonth;
-    entity.proficiency = skill.proficiency;
-    entity.proficiency_level = skill.proficiencyLevel;
+  mapSkillToEntity(dto: SkillDTO, entity = new Skill()): Skill {
+    entity.name = dto.name;
+    entity.description = dto.description;
+    entity.experience_in_month = dto.experienceInMonth;
+    entity.proficiency = dto.proficiency;
+    entity.proficiency_level = dto.proficiencyLevel;
     return entity;
   }
 

@@ -11,26 +11,26 @@ export class ExperienceService {
     private readonly experienceRepo: Repository<Experience>
   ) {}
 
-  mapExperienceFromEntity(experience: Experience): ExperienceDTOWithId {
+  mapExperienceFromEntity(entity: Experience): ExperienceDTOWithId {
     return {
-      organization: experience.organization,
-      designation: experience.designation,
-      startingDate: experience.starting_date,
-      endingDate: experience.ending_date,
-      workDescription: experience.work_description,
-      experienceId: experience.experience_id,
+      organization: entity.organization,
+      designation: entity.designation,
+      startingDate: entity.starting_date,
+      endingDate: entity.ending_date,
+      workDescription: entity.work_description,
+      experienceId: entity.experience_id,
     };
   }
 
   mapExperienceToEntity(
-    experience: ExperienceDTO,
+    dto: ExperienceDTO,
     entity = new Experience()
   ): Experience {
-    entity.organization = experience.organization;
-    entity.designation = experience.designation;
-    entity.starting_date = experience.startingDate;
-    entity.ending_date = experience.endingDate;
-    entity.work_description = experience.workDescription;
+    entity.organization = dto.organization;
+    entity.designation = dto.designation;
+    entity.starting_date = dto.startingDate;
+    entity.ending_date = dto.endingDate;
+    entity.work_description = dto.workDescription;
     return entity;
   }
 
@@ -48,14 +48,13 @@ export class ExperienceService {
   async updateExperience(
     experience: ExperienceDTOWithId
   ): Promise<ExperienceDTOWithId> {
-    const e = await this.experienceRepo.findOne({
-      where: { experience_id: experience.experienceId },
+    const e = await this.experienceRepo.findOneBy({
+      experience_id: experience.experienceId,
     });
 
     if (e == null) {
       return null;
     }
-
     this.mapExperienceToEntity(experience, e);
     await this.experienceRepo.save(e);
     return this.mapExperienceFromEntity(e);

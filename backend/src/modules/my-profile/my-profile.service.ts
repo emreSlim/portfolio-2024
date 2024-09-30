@@ -3,7 +3,14 @@ import { Repository } from 'typeorm';
 import { Location, MyProfile, ProfessionalProfile } from 'src/entities';
 import { InjectRepository } from '@nestjs/typeorm';
 import { GetMyProfile } from './my-profile.dto';
-import { MyProfileFullDTO, MyProfileFullDTOWithId } from 'src/dtos';
+import {
+  LocationDTO,
+  ProfessionalProfileDTO,
+  MyProfileFullDTO,
+  MyProfileFullDTOWithId,
+  LocationDTOWithId,
+  ProfessionalProfileDTOWithId,
+} from 'src/dtos';
 
 @Injectable()
 export class MyProfileService {
@@ -16,7 +23,65 @@ export class MyProfileService {
     private readonly professionalProfileRepo: Repository<ProfessionalProfile>
   ) {}
 
-  mapResProfileFromEntity(
+  mapLocationDTOToEntity(
+    dto: LocationDTO,
+    myProfileId: number,
+    entity = new Location()
+  ): Location {
+    entity.my_profile_id = myProfileId;
+    entity.city = dto.city;
+    entity.country = dto.country;
+    entity.state = dto.state;
+    entity.location_type = dto.locationType;
+    return entity;
+  }
+
+  mapLocationDTOFromEntity(entity: Location): LocationDTOWithId {
+    return {
+      city: entity.city,
+      country: entity.country,
+      locationId: entity.location_id,
+      locationType: entity.location_type,
+      state: entity.state,
+    };
+  }
+
+  mapProfessionalProfileDTOToEntity(
+    dto: ProfessionalProfileDTO,
+    myProfileId: number,
+    entity = new ProfessionalProfile()
+  ): ProfessionalProfile {
+    entity.my_profile_id = myProfileId;
+    entity.platform_name = dto.platformName;
+    entity.url = dto.url;
+    return entity;
+  }
+
+  mapProfessionalProfileDTOFromEntity(
+    entity: ProfessionalProfile
+  ): ProfessionalProfileDTOWithId {
+    return {
+      platformName: entity.platform_name,
+      professionalProfileId: entity.professional_profile_id,
+      url: entity.url,
+    };
+  }
+
+  mapProfileDTOToEntity(
+    dto: MyProfileFullDTO,
+    entity = new MyProfile()
+  ): MyProfile {
+    entity.first_name = dto.firstName;
+    entity.last_name = dto.lastName;
+    entity.nick_name = dto.nickName;
+    entity.email = dto.email;
+    entity.phone = dto.phone;
+    entity.about = dto.about;
+    entity.introduction = dto.introduction;
+    return entity;
+  }
+
+  mapProfileDTOFromEntity(
     mp: MyProfile,
     lc: Location[],
     pp: ProfessionalProfile[]
@@ -31,20 +96,10 @@ export class MyProfileService {
       myProfileId: mp.my_profile_id,
       phone: mp.phone,
       professionalProfiles: pp.map((p) => {
-        return {
-          platformName: p.platform_name,
-          professionalProfileId: p.professional_profile_id,
-          url: p.url,
-        };
+        return this.mapProfessionalProfileDTOFromEntity(p);
       }),
       locations: lc.map((l) => {
-        return {
-          locationType: l.location_type,
-          city: l.city,
-          country: l.country,
-          locationId: l.location_id,
-          state: l.state,
-        };
+        return this.mapLocationDTOFromEntity(l);
       }),
     };
   }
@@ -66,69 +121,48 @@ export class MyProfileService {
       my_profile_id: query.profileId,
     });
 
-    return this.mapResProfileFromEntity(mp, lc, pp);
+    return this.mapProfileDTOFromEntity(mp, lc, pp);
   }
 
   async addMyProfile(body: MyProfileFullDTO): Promise<MyProfileFullDTOWithId> {
-    const myProfile: MyProfile = {
-      first_name: body.firstName,
-      last_name: body.lastName,
-      nick_name: body.nickName,
-      email: body.email,
-      phone: body.phone,
-      about: body.about,
-      introduction: body.introduction,
-    };
+    const myProfile = this.mapProfileDTOToEntity(body);
 
     const mp = await this.myProfileRepo.save(myProfile);
 
     const locations: Location[] = body.locations.map((lo) => {
-      return {
-        my_profile_id: mp.my_profile_id,
-        city: lo.city,
-        country: lo.country,
-        state: lo.state,
-        location_type: lo.locationType,
-      };
+      return this.mapLocationDTOToEntity(lo, mp.my_profile_id);
     });
 
     const lc = await this.locationRepo.save(locations);
 
     const proProfiles: ProfessionalProfile[] = body.professionalProfiles.map(
       (pp) => {
-        return {
-          my_profile_id: mp.my_profile_id,
-          platform_name: pp.platformName,
-          url: pp.url,
-        };
+        return this.mapProfessionalProfileDTOToEntity(pp, mp.my_profile_id);
       }
     );
 
     const pp = await this.professionalProfileRepo.save(proProfiles);
 
-    return this.mapResProfileFromEntity(mp, lc, pp);
+    return this.mapProfileDTOFromEntity(mp, lc, pp);
   }
+
   async updateMyProfile(body: MyProfileFullDTOWithId) {
-    const myProfile: MyProfile = {
+    let mp = await this.myProfileRepo.findOneBy({
       my_profile_id: body.myProfileId,
-      first_name: body.firstName,
-      last_name: body.lastName,
-      nick_name: body.nickName,
-      email: body.email,
-      phone: body.phone,
-      about: body.about,
-      introduction: body.introduction,
-    };
-    const mp = await this.myProfileRepo.save(myProfile);
+    });
+
+    if (mp == null) {
+      throw new HttpException('Profile not found', HttpStatus.BAD_REQUEST);
+    }
+
+    mp = this.mapProfileDTOToEntity(body, mp);
+
+    await this.myProfileRepo.save(mp);
 
     const locations: Location[] = body.locations.map((lo) => {
       return {
-        my_profile_id: mp.my_profile_id,
+        ...this.mapLocationDTOToEntity(lo, mp.my_profile_id),
         location_id: lo.locationId,
-        city: lo.city,
-        country: lo.country,
-        state: lo.state,
-        location_type: lo.locationType,
       };
     });
 
@@ -137,16 +171,14 @@ export class MyProfileService {
     const proProfiles: ProfessionalProfile[] = body.professionalProfiles.map(
       (pp) => {
         return {
-          my_profile_id: mp.my_profile_id,
+          ...this.mapProfessionalProfileDTOToEntity(pp, mp.my_profile_id),
           professional_profile_id: pp.professionalProfileId,
-          platform_name: pp.platformName,
-          url: pp.url,
         };
       }
     );
 
     const pp = await this.professionalProfileRepo.save(proProfiles);
 
-    return this.mapResProfileFromEntity(mp, lc, pp);
+    return this.mapProfileDTOFromEntity(mp, lc, pp);
   }
 }

@@ -11,23 +11,23 @@ export class ProjectService {
     private readonly projectRepo: Repository<Project>
   ) {}
 
-  mapProjectFromEntity(project: Project): ProjectDTOWithId {
+  mapProjectFromEntity(entity: Project): ProjectDTOWithId {
     return {
-      name: project.name,
-      description: project.description,
-      url: project.url,
-      mediaUrl: project.media_url,
-      projectId: project.project_id,
-      sourceCodeUrl: project.source_code_url,
+      name: entity.name,
+      description: entity.description,
+      url: entity.url,
+      mediaUrl: entity.media_url,
+      projectId: entity.project_id,
+      sourceCodeUrl: entity.source_code_url,
     };
   }
 
-  mapProjectToEntity(project: ProjectDTO, entity = new Project()): Project {
-    entity.name = project.name;
-    entity.description = project.description;
-    entity.url = project.url;
-    entity.media_url = project.mediaUrl;
-    entity.source_code_url = project.sourceCodeUrl;
+  mapProjectToEntity(dto: ProjectDTO, entity = new Project()): Project {
+    entity.name = dto.name;
+    entity.description = dto.description;
+    entity.url = dto.url;
+    entity.media_url = dto.mediaUrl;
+    entity.source_code_url = dto.sourceCodeUrl;
     return entity;
   }
 
