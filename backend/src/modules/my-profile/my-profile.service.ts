@@ -78,6 +78,7 @@ export class MyProfileService {
     entity.phone = dto.phone;
     entity.about = dto.about;
     entity.introduction = dto.introduction;
+    entity.image_url = dto.imageUrl;
     return entity;
   }
 
@@ -95,6 +96,7 @@ export class MyProfileService {
       introduction: mp.introduction,
       myProfileId: mp.my_profile_id,
       phone: mp.phone,
+      imageUrl: mp.image_url,
       professionalProfiles: pp.map((p) => {
         return this.mapProfessionalProfileDTOFromEntity(p);
       }),

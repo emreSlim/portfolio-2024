@@ -1,0 +1,23 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  position: sticky;
+  top: 0;
+  width: 600px;
+  margin: auto;
+  list-style: none;
+}
+
+.header-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+.header-link:hover {
+  color: #fe6928;
+}

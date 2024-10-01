@@ -10,4 +10,5 @@ CREATE TABLE my_profile (
   country VARCHAR(20),
   introduction VARCHAR(500),
   about VARCHAR(5000)
+  image_url VARCHAR(200),
 );

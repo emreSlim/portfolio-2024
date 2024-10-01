@@ -37,4 +37,7 @@ export class MyProfile {
 
   @Column({ type: 'varchar', length: 5000 })
   about: About;
+
+  @Column({ type: 'varchar', length: 200 })
+  image_url: string;
 }

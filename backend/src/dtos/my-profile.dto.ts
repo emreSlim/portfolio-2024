@@ -31,6 +31,8 @@ export class MyProfileDTO {
   introduction: Introduction;
   @ApiProperty()
   about: About;
+  @ApiProperty()
+  imageUrl: string;
 }
 
 export class MyProfileFullDTO extends MyProfileDTO {

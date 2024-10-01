@@ -1,0 +1,45 @@
+.canvas-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 6rem;
+  margin: 1rem 0;
+  color: white;
+}
+
+.intro {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  color: white;
+  max-width: 900px;
+  text-align: center;
+}
+
+.profile-links {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  list-style: none;
+}
+
+.profile-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin: 0 10px;
+}
+
+.profile-link:hover {
+  color: #fe6928;
+}
