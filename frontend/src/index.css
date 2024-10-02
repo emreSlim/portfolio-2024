@@ -9,3 +9,30 @@
 body {
   background-color: #000524;
 }
+
+.left-right-container {
+  display: flex;
+  justify-content: center;
+  padding: 6rem 0;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.divider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  opacity: 0.1;
+  background-color: black;
+  margin: 2rem auto;
+
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  justify-self: center;
+  flex: 1;
+}

@@ -12,6 +12,7 @@ export const Loader: React.FC<LoaderProps> = ({ size = 24 }) => {
       height={size}
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"
+      className="centered"
     >
       <circle
         cx="50"

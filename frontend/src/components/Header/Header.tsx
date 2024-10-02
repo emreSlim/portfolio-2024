@@ -4,7 +4,7 @@ import './style.css';
 export const Header = () => {
   return (
     <header className="header-container">
-      <ul className="header-container">
+      <ul className="header-links">
         <li>
           <a className="header-link" href="#home">
             HOME

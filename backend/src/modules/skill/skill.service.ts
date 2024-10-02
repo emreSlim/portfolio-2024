@@ -32,7 +32,9 @@ export class SkillService {
   }
 
   async getAllSkills(): Promise<SkillDTOWithId[]> {
-    const skills = await this.skillRepo.find();
+    const skills = await this.skillRepo.find({
+      order: { proficiency: 'DESC' },
+    });
     return skills.map((s) => this.mapSkillFromEntity(s));
   }
 

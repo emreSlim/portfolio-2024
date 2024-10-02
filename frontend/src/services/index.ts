@@ -13,14 +13,14 @@ export class Service {
   };
 
   static getExperience = async () => {
-    return await axios.get<any, AxiosResponse<Experience>>('/experience', {});
+    return await axios.get<any, AxiosResponse<Experience[]>>('/experience', {});
   };
 
   static getProjects = async () => {
-    return await axios.get<any, AxiosResponse<Project>>('/projects', {});
+    return await axios.get<any, AxiosResponse<Project[]>>('/project', {});
   };
 
   static getSkills = async () => {
-    return await axios.get<any, AxiosResponse<Skill>>('/skills', {});
+    return await axios.get<any, AxiosResponse<Skill[]>>('/skill', {});
   };
 }

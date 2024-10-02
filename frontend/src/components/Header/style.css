@@ -1,13 +1,21 @@
 .header-container {
+  align-items: center;
+  position: sticky;
+  top: 0;
+  margin: auto;
+  background-color: hsla(0, 0%, 0%, 0.359);
+}
+
+.header-links {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 40px;
-  position: sticky;
-  top: 0;
-  width: 600px;
-  margin: auto;
   list-style: none;
+  padding: 0;
+  height: 40px;
+  width: 600px;
+  margin: 0 auto;
+  padding: 4px;
 }
 
 .header-link {
@@ -16,6 +24,7 @@
   font-size: 1.2rem;
   margin: 0 10px;
   font-weight: bold;
+  padding: 0;
 }
 
 .header-link:hover {

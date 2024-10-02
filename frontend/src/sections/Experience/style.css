@@ -1,0 +1,113 @@
+.experience-container {
+  background-color: antiquewhite;
+}
+
+.sub-section-left {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  min-width: 200px;
+}
+
+.sub-section-title {
+  font-size: 2.5rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 4px solid black;
+}
+
+.sub-section-right {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-size: 1.5rem;
+  list-style: none;
+  padding-left: 0;
+}
+
+.work-experience {}
+
+.work-experience:not(:last-child) {
+  margin-bottom: 3rem;
+}
+
+
+
+.designation-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.designation {
+  font-weight: bold;
+}
+
+.designation-duration {
+  font-style: italic;
+  color: rgb(74, 74, 74);
+  font-size: 1rem;
+}
+
+.organization-container {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 1rem;
+  gap: 1rem
+}
+
+.work-description {
+  font-size: 1rem;
+}
+
+.skill {}
+
+.skill:not(:last-child) {
+  margin-bottom: 3rem;
+}
+
+.skill-name-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.skill-name {
+  font-weight: bold;
+}
+
+.skill-proficiency-level {
+  font-style: italic;
+  text-transform: uppercase;
+  color: rgb(74, 74, 74);
+  font-size: 1rem;
+}
+
+.proficiency {
+  background-color: #f1f1f1;
+  margin-bottom: 1rem;
+}
+
+.proficiency-bar {
+  background-color: #4CAF50;
+  height: 1rem;
+}
+
+.experience-in-month-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.experience-in-month-title {
+  font-weight: bold;
+}
+
+.experience-in-month {
+  font-style: italic;
+  color: rgb(74, 74, 74);
+  font-size: 1rem;
+}
+
+.skill-description {
+  font-size: 1rem;
+}
