@@ -19,6 +19,7 @@ export class ProjectService {
       mediaUrl: entity.media_url,
       projectId: entity.project_id,
       sourceCodeUrl: entity.source_code_url,
+      thumbnailUrl: entity.thumbnail_url,
     };
   }
 
@@ -28,6 +29,7 @@ export class ProjectService {
     entity.url = dto.url;
     entity.media_url = dto.mediaUrl;
     entity.source_code_url = dto.sourceCodeUrl;
+    entity.thumbnail_url = dto.thumbnailUrl;
     return entity;
   }
 

@@ -4,6 +4,7 @@ import {
   ProjectMediaUrl,
   ProjectName,
   ProjectSourceCodeUrl,
+  ProjectThumbnailUrl,
   ProjectUrl,
 } from 'src/entities';
 
@@ -22,6 +23,9 @@ export class ProjectDTO {
 
   @ApiProperty()
   sourceCodeUrl: ProjectSourceCodeUrl;
+
+  @ApiProperty()
+  thumbnailUrl: ProjectThumbnailUrl;
 }
 
 export class ProjectDTOWithId extends ProjectDTO {

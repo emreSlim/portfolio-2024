@@ -3,6 +3,7 @@ export type ProjectDescription = string & { readonly brand: unique symbol };
 export type ProjectUrl = string & { readonly brand: unique symbol };
 export type ProjectMediaUrl = string & { readonly brand: unique symbol };
 export type ProjectSourceCodeUrl = string & { readonly brand: unique symbol };
+export type ProjectThumbnailUrl = string & { readonly brand: unique symbol };
 
 export interface Project {
   projectId: number;
@@ -11,4 +12,5 @@ export interface Project {
   url: ProjectUrl;
   mediaUrl: ProjectMediaUrl;
   sourceCodeUrl: ProjectSourceCodeUrl;
+  thumbnailUrl: ProjectThumbnailUrl;
 }
