@@ -1,7 +1,13 @@
 import React from 'react';
 import './App.css';
 import { Header } from 'src/components';
-import { About, Contact, Experience, Home, Projects } from 'src/sections';
+import {
+  About,
+  Contact,
+  ExperienceSection,
+  Home,
+  Projects,
+} from 'src/sections';
 import { MyProfile } from 'src/interfaces';
 import { Service } from 'src/services';
 
@@ -19,7 +25,7 @@ function App() {
       <Header />
       <Home myProfile={myProfile} />
       <About myProfile={myProfile} />
-      <Experience />
+      <ExperienceSection />
       <Projects />
       <Contact />
     </div>
