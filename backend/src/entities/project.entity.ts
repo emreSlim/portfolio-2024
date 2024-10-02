@@ -27,6 +27,8 @@ export class Project {
   @Column({ type: 'varchar', length: 500 })
   media_url: ProjectMediaUrl;
 
+  //introduce thumbnail_url TBD
+
   @Column({ type: 'varchar', length: 500 })
   source_code_url: ProjectSourceCodeUrl;
 }

@@ -1,34 +1,35 @@
 import React from 'react';
 import './style.css';
+import { SmoothScrollingLink } from '../Link';
 
 export const Header = () => {
   return (
     <header className="header-container">
       <ul className="header-links">
         <li>
-          <a className="header-link" href="#home">
+          <SmoothScrollingLink className="header-link" targetId="#home">
             HOME
-          </a>
+          </SmoothScrollingLink>
         </li>
         <li>
-          <a className="header-link" href="#about">
+          <SmoothScrollingLink className="header-link" targetId="#about">
             ABOUT
-          </a>
+          </SmoothScrollingLink>
         </li>
         <li>
-          <a className="header-link" href="#experience">
+          <SmoothScrollingLink className="header-link" targetId="#experience">
             EXPERIENCE
-          </a>
+          </SmoothScrollingLink>
         </li>
         <li>
-          <a className="header-link" href="#projects">
+          <SmoothScrollingLink className="header-link" targetId="#projects">
             PROJECTS
-          </a>
+          </SmoothScrollingLink>
         </li>
         <li>
-          <a className="header-link" href="#contact">
+          <SmoothScrollingLink className="header-link" targetId="#contact">
             CONTACT
-          </a>
+          </SmoothScrollingLink>
         </li>
       </ul>
     </header>
