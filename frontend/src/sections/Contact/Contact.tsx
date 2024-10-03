@@ -2,6 +2,8 @@ import React from 'react';
 import './style.css';
 import { MyProfile } from 'src/interfaces';
 import { Loader } from 'src/components';
+import { FaPhone } from 'react-icons/fa';
+import { MdAlternateEmail } from 'react-icons/md';
 
 interface ContactProps {
   myProfile?: MyProfile;
@@ -16,13 +18,13 @@ export const Contact: React.FC<ContactProps> = ({ myProfile }) => {
       ) : (
         <ul className="contact-links">
           <li>
-            <h4>Phone :</h4>
+            <FaPhone /> :
             <a href={`tel:${myProfile.phone}`} className="contact-link">
               {myProfile.phone}
             </a>
           </li>
           <li>
-            <h4>Email :</h4>
+            <MdAlternateEmail /> :
             <a href={`mailto:${myProfile.email}`} className="contact-link">
               {myProfile.email}
             </a>

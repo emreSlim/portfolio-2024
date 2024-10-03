@@ -92,18 +92,22 @@ const Skills: React.FC<SkillsProps> = ({}) => {
                   ({skill.proficiencyLevel})
                 </p>
               </div>
-              <div className="proficiency">
-                <div
-                  className="proficiency-bar"
-                  style={{ width: `${skill.proficiency * 10}%` }}
-                ></div>
-              </div>
-              <div className="experience-in-month-container">
-                <h5 className="experience-in-month-title">Experience</h5>
-                <p className="experience-in-month">
-                  {skill.experienceInMonth} MONTHS
-                </p>
-              </div>
+              {skill.proficiency && (
+                <div className="proficiency">
+                  <div
+                    className="proficiency-bar"
+                    style={{ width: `${skill.proficiency * 10}%` }}
+                  ></div>
+                </div>
+              )}
+              {skill.experienceInMonth && (
+                <div className="experience-in-month-container">
+                  <h5 className="experience-in-month-title">Experience</h5>
+                  <p className="experience-in-month">
+                    {skill.experienceInMonth} MONTHS
+                  </p>
+                </div>
+              )}
               <p className="skill-description">{skill.description}</p>
             </li>
           ))

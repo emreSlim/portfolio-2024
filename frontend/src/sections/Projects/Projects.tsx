@@ -4,6 +4,7 @@ import { Project } from 'src/interfaces';
 import ReactPlayer from 'react-player/file';
 import { Service } from 'src/services';
 import { Loader } from 'src/components';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 // import screenfull from "screenfull";
 
 export const Projects = () => {
@@ -40,14 +41,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ project }) => {
 
   return (
     <div>
-      {isProjectDetailsOpen && (
-        <ProjectDetails
-          project={project}
-          onClose={() => setIsProjectDetailsOpen(false)}
-        />
-      )}
-
-      <div
+      <button
         className="project-item-card"
         onClick={() => setIsProjectDetailsOpen(true)}
       >
@@ -57,7 +51,13 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ project }) => {
           className="project-thumbnail"
         />
         <p className="project-name">{project.name}</p>
-      </div>
+      </button>
+      {isProjectDetailsOpen && (
+        <ProjectDetails
+          project={project}
+          onClose={() => setIsProjectDetailsOpen(false)}
+        />
+      )}
     </div>
   );
 };
@@ -83,7 +83,13 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
   }, [isPlaying]);
 
   useEffect(() => {
-    setIsOpen(true);
+    setTimeout(() => setIsOpen(true), 100);
+    return () => {
+      setIsOpen(false);
+    };
+  }, []);
+
+  useEffect(() => {
     const closeOnEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setIsOpen(false);
@@ -113,7 +119,6 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
         <div className="project-details-header">
           <h2 className="project-details-title">{project.name}</h2>
           <button
-            className="project-details-header-close"
             onClick={() => {
               // setIsPlaying(false);
               setIsOpen(false);
@@ -122,7 +127,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
               }, 300);
             }}
           >
-            Close
+            <IoIosCloseCircleOutline className="project-details-header-close" />
           </button>
         </div>
         <div className="project-details-content">

@@ -1,9 +1,11 @@
 .header-container {
   align-items: center;
-  position: sticky;
+  position: fixed;
   top: 0;
-  margin: auto;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: hsla(0, 0%, 0%, 0.359);
+  border-radius: 0 0 10px 10px;
 }
 
 .header-links {
@@ -13,9 +15,10 @@
   list-style: none;
   padding: 0;
   height: 40px;
+
   width: 600px;
   margin: 0 auto;
-  padding: 4px;
+  padding: 4px 12px;
 }
 
 .header-link {
