@@ -83,7 +83,10 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
   }, [isPlaying]);
 
   useEffect(() => {
-    setTimeout(() => setIsOpen(true), 100);
+    setTimeout(() => {
+      setIsOpen(true);
+      setIsPlaying(true);
+    }, 100);
     return () => {
       setIsOpen(false);
     };
@@ -120,7 +123,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
           <h2 className="project-details-title">{project.name}</h2>
           <button
             onClick={() => {
-              // setIsPlaying(false);
+              setIsPlaying(false);
               setIsOpen(false);
               setTimeout(() => {
                 onClose();
@@ -132,15 +135,25 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
         </div>
         <div className="project-details-content">
           <div className="project-details-media">
-            <ReactPlayer
-              ref={playerRef}
-              url={project.mediaUrl}
-              playing={isPlaying}
-              controls
-              width={'100%'}
-              height={'100%'}
-              onEnded={() => setIsPlaying(false)}
-            />
+            {ReactPlayer.canPlay(project.mediaUrl) ? (
+              <ReactPlayer
+                ref={playerRef}
+                url={project.mediaUrl}
+                playing={isPlaying}
+                controls
+                width="100%"
+                height="100%"
+                onEnded={() => setIsPlaying(false)}
+              />
+            ) : (
+              <img
+                src={project.thumbnailUrl}
+                alt={project.name}
+                width="100%"
+                height="100%"
+                className="project-details-image"
+              />
+            )}
           </div>
           <div className="project-details-description">
             <h3 className="project-details-description-heading">

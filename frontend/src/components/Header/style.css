@@ -6,6 +6,7 @@
   transform: translateX(-50%);
   background-color: hsla(0, 0%, 0%, 0.359);
   border-radius: 0 0 10px 10px;
+  z-index: 2;
 }
 
 .header-links {
