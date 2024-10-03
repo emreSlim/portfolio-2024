@@ -1,0 +1,30 @@
+.contact-container {
+  padding: 4rem 4em;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.contact-container * {
+  color: antiquewhite;
+}
+
+
+.contact-title {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.contact-links li {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  ;
+}

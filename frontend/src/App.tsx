@@ -27,7 +27,7 @@ function App() {
       <About myProfile={myProfile} />
       <ExperienceSection />
       <Projects />
-      <Contact />
+      <Contact myProfile={myProfile} />
     </div>
   );
 }
