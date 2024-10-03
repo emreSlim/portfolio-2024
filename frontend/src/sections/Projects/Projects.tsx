@@ -84,7 +84,21 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
 
   useEffect(() => {
     setIsOpen(true);
-  }, []);
+    const closeOnEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+        setTimeout(() => {
+          onClose();
+        }, 300);
+      }
+    };
+
+    window.addEventListener('keydown', closeOnEscape);
+
+    return () => {
+      window.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [onClose]);
 
   return (
     <div
@@ -97,7 +111,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
         className={`project-details ${isOpen ? '' : 'project-details-closed'}`}
       >
         <div className="project-details-header">
-          <h3 className="project-details-header-title">{project.name}</h3>
+          <h2 className="project-details-title">{project.name}</h2>
           <button
             className="project-details-header-close"
             onClick={() => {
@@ -111,22 +125,35 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
             Close
           </button>
         </div>
-        <ReactPlayer
-          ref={playerRef}
-          url={project.mediaUrl}
-          playing={isPlaying}
-          controls
-          width="600px"
-          height="400px"
-          onEnded={() => setIsPlaying(false)}
-        />
-        <p>{project.description}</p>
-        <a href={project.url} target="_blank" rel="noreferrer">
-          {project.url}
-        </a>
-        <a href={project.sourceCodeUrl} target="_blank" rel="noreferrer">
-          {project.sourceCodeUrl}
-        </a>
+        <div className="project-details-content">
+          <div className="project-details-media">
+            <ReactPlayer
+              ref={playerRef}
+              url={project.mediaUrl}
+              playing={isPlaying}
+              controls
+              width={'100%'}
+              height={'100%'}
+              onEnded={() => setIsPlaying(false)}
+            />
+          </div>
+          <div className="project-details-description">
+            <h3 className="project-details-description-heading">
+              Project Description
+            </h3>
+            <p className="project-details-description-text">
+              {project.description}
+            </p>
+            <div className="project-details-links">
+              <a href={project.url} target="_blank" rel="noreferrer">
+                VIEW PROJECT
+              </a>
+              <a href={project.sourceCodeUrl} target="_blank" rel="noreferrer">
+                VIEW SOURCE CODE
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
