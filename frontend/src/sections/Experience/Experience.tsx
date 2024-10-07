@@ -16,7 +16,7 @@ export const ExperienceSection = () => {
 
 interface WorkExpsProps {}
 
-const WorkExps: React.FC<WorkExpsProps> = ({}) => {
+const WorkExps: React.FC<WorkExpsProps> = () => {
   const [exp, setExp] = React.useState<Experience[]>();
 
   React.useEffect(() => {
@@ -66,7 +66,7 @@ const WorkExps: React.FC<WorkExpsProps> = ({}) => {
 
 interface SkillsProps {}
 
-const Skills: React.FC<SkillsProps> = ({}) => {
+const Skills: React.FC<SkillsProps> = () => {
   const [skills, setSkills] = React.useState<Skill[]>();
 
   React.useEffect(() => {
