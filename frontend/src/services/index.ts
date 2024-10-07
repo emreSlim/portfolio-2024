@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { Experience, MyProfile, Project, Skill } from 'src/interfaces';
 
-axios.defaults.baseURL = 'http://localhost:3001/';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 export class Service {
   static getMyProfile = async () => {
