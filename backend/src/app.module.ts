@@ -15,9 +15,11 @@ import {
 import { SkillModule } from './modules/skill/skill.module';
 import { ProjectModule } from './modules/project/project.module';
 import { ExperienceModule } from './modules/experience/experience.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     Postgre.getModule([
       MyProfile,
       Location,
