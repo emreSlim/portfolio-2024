@@ -5,13 +5,13 @@ FROM node:16 AS builder
 WORKDIR /app
 
 # Copy the package.json and package-lock.json (if available)
-COPY backend/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy the entire source code into the container
-COPY backend/ .
+COPY . .
 
 # Build the application (assuming you have a build script in package.json)
 RUN npm run build
