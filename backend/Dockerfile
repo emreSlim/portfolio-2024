@@ -1,5 +1,5 @@
 # Stage 1: Install dependencies and build the application
-FROM node:16 AS builder
+FROM node:18.18.0 AS builder
 
 # Set working directory inside the container
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Build a lightweight image for production
-FROM node:16-alpine AS production
+FROM node:18.18.0-alpine AS production
 
 # Set the working directory inside the container
 WORKDIR /app
