@@ -21,7 +21,9 @@ export const About: React.FC<AboutProps> = ({ myProfile }) => {
           />
           <div className="about-content">
             <h3 className="about-title">About Me</h3>
-            <p className="about-description">{myProfile.about}</p>
+            {myProfile.about.split('\n').map((line, index) => (
+              <p className="about-description">{line}</p>
+            ))}
           </div>
         </>
       )}

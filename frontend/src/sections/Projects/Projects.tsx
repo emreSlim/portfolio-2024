@@ -19,6 +19,13 @@ export const Projects = () => {
   return (
     <section id="projects" className="projects-container">
       <h3 className="projects-heading">Projects</h3>
+      <p className="projects-disclaimer">
+        All the below projects are built by me either for learning or as a
+        hobby. This list does not include any of my professional work.
+      </p>
+      <p className="projects-disclaimer">
+        Click on the project to view more details.
+      </p>
       <div className="projects">
         {projects == null ? (
           <Loader />
@@ -143,6 +150,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
                 controls
                 width="100%"
                 height="100%"
+                volume={0.3}
                 onEnded={() => setIsPlaying(false)}
               />
             ) : (
@@ -163,12 +171,20 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
               {project.description}
             </p>
             <div className="project-details-links">
-              <a href={project.url} target="_blank" rel="noreferrer">
-                VIEW PROJECT
-              </a>
-              <a href={project.sourceCodeUrl} target="_blank" rel="noreferrer">
-                VIEW SOURCE CODE
-              </a>
+              {project.url && (
+                <a href={project.url} target="_blank" rel="noreferrer">
+                  VIEW PROJECT
+                </a>
+              )}
+              {project.sourceCodeUrl && (
+                <a
+                  href={project.sourceCodeUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  VIEW SOURCE CODE
+                </a>
+              )}
             </div>
           </div>
         </div>

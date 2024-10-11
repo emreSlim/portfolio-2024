@@ -35,7 +35,9 @@ export class ExperienceService {
   }
 
   async getAllExperiences(): Promise<ExperienceDTOWithId[]> {
-    const experiences = await this.experienceRepo.find();
+    const experiences = await this.experienceRepo.find({
+      order: { starting_date: 'DESC' },
+    });
     return experiences.map((e) => this.mapExperienceFromEntity(e));
   }
 

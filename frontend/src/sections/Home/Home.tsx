@@ -53,7 +53,7 @@ interface HomeContentProps {
 
 const HomeContent: React.FC<HomeContentProps> = ({ myProfile: mp }) => {
   return (
-    <>
+    <div className="home-content">
       <h1 className="title">
         {mp.firstName} ({mp.nickName})
       </h1>
@@ -72,6 +72,6 @@ const HomeContent: React.FC<HomeContentProps> = ({ myProfile: mp }) => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };

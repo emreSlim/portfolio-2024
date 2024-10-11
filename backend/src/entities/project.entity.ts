@@ -19,7 +19,7 @@ export class Project {
   @Column({ type: 'varchar', length: 50 })
   name: ProjectName;
 
-  @Column({ type: 'varchar', length: 500 })
+  @Column({ type: 'varchar', length: 2000 })
   description: ProjectDescription;
 
   @Column({ type: 'varchar', length: 500 })
