@@ -9,6 +9,6 @@ CREATE TABLE my_profile (
   state VARCHAR(20),
   country VARCHAR(20),
   introduction VARCHAR(500),
-  about VARCHAR(5000)
-  image_url VARCHAR(200),
+  about VARCHAR(5000),
+  image_url VARCHAR(200)
 );

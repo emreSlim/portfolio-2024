@@ -26,6 +26,7 @@ WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/.env ./
 
 # Expose the port on which the app will run
 EXPOSE 3001
