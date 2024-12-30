@@ -24,7 +24,7 @@ export class Experience {
   @Column({ type: 'date' })
   starting_date: StartingDate;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable: true })
   ending_date: EndingDate;
 
   @Column({ type: 'varchar', length: 1000 })
