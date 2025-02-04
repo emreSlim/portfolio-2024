@@ -1,6 +1,11 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Location, MyProfile, ProfessionalProfile } from 'src/entities';
+import {
+  Location,
+  MyProfile,
+  myProfileEntity,
+  ProfessionalProfile,
+} from 'src/entities';
 import { InjectRepository } from '@nestjs/typeorm';
 import { GetMyProfile } from './my-profile.dto';
 import {
@@ -11,12 +16,13 @@ import {
   LocationDTOWithId,
   ProfessionalProfileDTOWithId,
 } from 'src/dtos';
+import { Repository as JDBRepository } from '../json-db/repository';
 
 @Injectable()
 export class MyProfileService {
+  private readonly myProfileRepo = new JDBRepository(myProfileEntity);
+
   constructor(
-    @InjectRepository(MyProfile)
-    private readonly myProfileRepo: Repository<MyProfile>,
     @InjectRepository(Location)
     private readonly locationRepo: Repository<Location>,
     @InjectRepository(ProfessionalProfile)
@@ -69,7 +75,7 @@ export class MyProfileService {
 
   mapProfileDTOToEntity(
     dto: MyProfileFullDTO,
-    entity = new MyProfile()
+    entity = {} as MyProfile
   ): MyProfile {
     entity.first_name = dto.firstName;
     entity.last_name = dto.lastName;
@@ -109,8 +115,8 @@ export class MyProfileService {
   async getMyProfile(
     query: GetMyProfile.Query
   ): Promise<MyProfileFullDTOWithId> {
-    const mp = await this.myProfileRepo.findOneBy({
-      my_profile_id: query.profileId,
+    const mp = await this.myProfileRepo.findOne({
+      where: { my_profile_id: query.profileId },
     });
     if (mp == null) {
       throw new HttpException('Profile not found', HttpStatus.BAD_REQUEST);
@@ -149,8 +155,8 @@ export class MyProfileService {
   }
 
   async updateMyProfile(body: MyProfileFullDTOWithId) {
-    let mp = await this.myProfileRepo.findOneBy({
-      my_profile_id: body.myProfileId,
+    let mp = await this.myProfileRepo.findOne({
+      where: { my_profile_id: body.myProfileId },
     });
 
     if (mp == null) {

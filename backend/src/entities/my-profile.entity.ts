@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column, ColumnType } from 'src/modules/json-db/';
 
 export type Email = string & { readonly brand: unique symbol };
 export type Phone = string & { readonly brand: unique symbol };
@@ -8,36 +8,26 @@ export type NickName = string & { readonly brand: unique symbol };
 export type Introduction = string & { readonly brand: unique symbol };
 export type About = string & { readonly brand: unique symbol };
 
-@Entity({
-  name: 'my_profile',
-})
-export class MyProfile {
-  @PrimaryGeneratedColumn({
-    type: 'int',
-  })
-  my_profile_id?: number;
-
-  @Column({ type: 'varchar', length: 30 })
+export interface MyProfile {
+  my_profile_id: number;
   email: Email;
-
-  @Column({ type: 'varchar', length: 20 })
   phone: Phone;
-
-  @Column({ type: 'varchar', length: 10 })
   first_name: FirstName;
-
-  @Column({ type: 'varchar', length: 10 })
   last_name: LastName;
-
-  @Column({ type: 'varchar', length: 20 })
   nick_name: NickName;
-
-  @Column({ type: 'varchar', length: 500 })
   introduction: Introduction;
-
-  @Column({ type: 'varchar', length: 5000 })
   about: About;
-
-  @Column({ type: 'varchar', length: 200 })
   image_url: string;
 }
+
+export const myProfileEntity = new Entity<MyProfile>('my_profile', [
+  new Column('my_profile_id', ColumnType.NUMBER),
+  new Column('email', ColumnType.STRING),
+  new Column('phone', ColumnType.STRING),
+  new Column('first_name', ColumnType.STRING),
+  new Column('last_name', ColumnType.STRING),
+  new Column('nick_name', ColumnType.STRING),
+  new Column('introduction', ColumnType.STRING),
+  new Column('about', ColumnType.STRING),
+  new Column('image_url', ColumnType.STRING),
+]);

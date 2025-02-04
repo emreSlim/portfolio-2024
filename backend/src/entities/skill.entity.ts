@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column, ColumnType } from 'src/modules/json-db/';
 
 export type SkillName = string & { readonly brand: unique symbol };
 export type SkillDescription = string & { readonly brand: unique symbol };
@@ -6,27 +6,20 @@ export type Proficiency = number & { readonly brand: unique symbol };
 export type ExperienceInMonth = number & { readonly brand: unique symbol };
 export type ProficiencyLevel = string & { readonly brand: unique symbol };
 
-@Entity({
-  name: 'skill',
-})
-export class Skill {
-  @PrimaryGeneratedColumn({
-    type: 'int',
-  })
-  skill_id?: number;
-
-  @Column({ type: 'varchar', length: 100 })
+export interface Skill {
+  skill_id: number;
   name: SkillName;
-
-  @Column({ type: 'varchar', length: 1000 })
   description: SkillDescription;
-
-  @Column({ type: 'int' })
   proficiency: Proficiency;
-
-  @Column({ type: 'int' })
   experience_in_month: ExperienceInMonth;
-
-  @Column({ type: 'varchar', length: 50 })
   proficiency_level: ProficiencyLevel;
 }
+
+export const skillEntity = new Entity<Skill>('skill', [
+  new Column('skill_id', ColumnType.SERIAL),
+  new Column('name', ColumnType.STRING),
+  new Column('description', ColumnType.STRING),
+  new Column('proficiency', ColumnType.NUMBER),
+  new Column('experience_in_month', ColumnType.NUMBER),
+  new Column('proficiency_level', ColumnType.STRING),
+]);

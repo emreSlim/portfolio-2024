@@ -1,15 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { SkillDTO, SkillDTOWithId } from 'src/dtos';
-import { Skill } from 'src/entities';
-import { Repository } from 'typeorm';
+import { Skill, skillEntity } from 'src/entities';
+import { Repository } from '../json-db';
 
 @Injectable()
 export class SkillService {
-  constructor(
-    @InjectRepository(Skill)
-    private readonly skillRepo: Repository<Skill>
-  ) {}
+  private readonly skillRepo = new Repository(skillEntity);
+
+  constructor() {}
 
   mapSkillFromEntity(entity: Skill): SkillDTOWithId {
     return {
@@ -22,7 +20,7 @@ export class SkillService {
     };
   }
 
-  mapSkillToEntity(dto: SkillDTO, entity = new Skill()): Skill {
+  mapSkillToEntity(dto: SkillDTO, entity = {} as Skill): Skill {
     entity.name = dto.name;
     entity.description = dto.description;
     entity.experience_in_month = dto.experienceInMonth;
@@ -45,14 +43,25 @@ export class SkillService {
   }
 
   async updateSkill(skill: SkillDTOWithId): Promise<SkillDTOWithId> {
-    const s = await this.skillRepo.findOneBy({ skill_id: skill.skillId });
+    const s = await this.skillRepo.findOne({
+      where: { skill_id: skill.skillId },
+    });
 
-    if (s == null) {
-      return null;
+    if (!s) {
+      throw new Error('Skill not found');
     }
 
     this.mapSkillToEntity(skill, s);
-    await this.skillRepo.save(s);
+
+    await this.skillRepo.update(
+      {
+        where: {
+          skill_id: s.skill_id,
+        },
+      },
+      s
+    );
+
     return this.mapSkillFromEntity(s);
   }
 }
