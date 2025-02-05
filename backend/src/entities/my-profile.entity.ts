@@ -21,7 +21,7 @@ export interface MyProfile {
 }
 
 export const myProfileEntity = new Entity<MyProfile>('my_profile', [
-  new Column('my_profile_id', ColumnType.NUMBER),
+  new Column('my_profile_id', ColumnType.SERIAL),
   new Column('email', ColumnType.STRING),
   new Column('phone', ColumnType.STRING),
   new Column('first_name', ColumnType.STRING),

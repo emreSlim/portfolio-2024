@@ -112,19 +112,20 @@ export class MyProfileService {
   async getMyProfile(
     query: GetMyProfile.Query
   ): Promise<MyProfileFullDTOWithId> {
+    const profileId = +query.profileId;
     const mp = await this.myProfileRepo.findOne({
-      my_profile_id: query.profileId,
+      my_profile_id: profileId,
     });
     if (mp == null) {
       throw new HttpException('Profile not found', HttpStatus.BAD_REQUEST);
     }
 
     const lc = await this.locationRepo.find({
-      where: { my_profile_id: query.profileId },
+      where: { my_profile_id: profileId },
     });
     const pp = await this.professionalProfileRepo.find({
       where: {
-        my_profile_id: query.profileId,
+        my_profile_id: profileId,
       },
     });
 

@@ -5,6 +5,6 @@ export namespace GetMyProfile {
   export class Query {
     @ApiProperty()
     @IsNumber()
-    profileId: number;
+    profileId: string;
   }
 }

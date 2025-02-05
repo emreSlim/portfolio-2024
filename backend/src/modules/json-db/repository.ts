@@ -103,7 +103,6 @@ export class Repository<DataType> {
 
   async findOne(where?: Partial<DataType>): Promise<DataType | null> {
     const table = await this.getTable();
-
     return table.find((data: DataType) =>
       Object.entries(where ?? {}).every(([key, value]) => data[key] === value)
     );
