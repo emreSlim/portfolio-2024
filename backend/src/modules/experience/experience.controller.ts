@@ -14,11 +14,11 @@ export class ExperienceController {
   }
 
   @Post()
-  @ApiBody({ type: ExperienceDTO })
-  @ApiResponse({ type: ExperienceDTOWithId })
+  @ApiBody({ type: [ExperienceDTO] })
+  @ApiResponse({ type: [ExperienceDTOWithId] })
   addExperience(
-    @Body() experience: ExperienceDTO
-  ): Promise<ExperienceDTOWithId> {
+    @Body() experience: ExperienceDTO[]
+  ): Promise<ExperienceDTOWithId[]> {
     return this.service.addExperience(experience);
   }
 

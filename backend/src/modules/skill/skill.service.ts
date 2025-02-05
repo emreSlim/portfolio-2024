@@ -35,10 +35,10 @@ export class SkillService {
     return skills.map((s) => this.mapSkillFromEntity(s));
   }
 
-  async addSkill(skill: SkillDTO): Promise<SkillDTOWithId> {
-    const s = this.mapSkillToEntity(skill);
-    await this.skillRepo.save(s);
-    return this.mapSkillFromEntity(s);
+  async addSkill(skills: SkillDTO[]): Promise<SkillDTOWithId[]> {
+    const mapped = skills.map((skill) => this.mapSkillToEntity(skill));
+    await this.skillRepo.save(mapped);
+    return mapped.map((skill) => this.mapSkillFromEntity(skill));
   }
 
   async updateSkill(skill: SkillDTOWithId): Promise<SkillDTOWithId> {

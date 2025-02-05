@@ -35,10 +35,12 @@ export class ProjectService {
     return projects.map((p) => this.mapProjectFromEntity(p));
   }
 
-  async addProject(project: ProjectDTO): Promise<ProjectDTOWithId> {
-    const p = this.mapProjectToEntity(project);
-    await this.projectRepo.save(p);
-    return this.mapProjectFromEntity(p);
+  async addProject(projects: ProjectDTO[]): Promise<ProjectDTOWithId[]> {
+    const mapped = projects.map((project) => this.mapProjectToEntity(project));
+
+    await this.projectRepo.save(mapped);
+
+    return mapped.map((project) => this.mapProjectFromEntity(project));
   }
 
   async updateProject(project: ProjectDTOWithId): Promise<ProjectDTOWithId> {

@@ -14,9 +14,9 @@ export class ProjectController {
   }
 
   @Post()
-  @ApiBody({ type: ProjectDTO })
-  @ApiResponse({ type: ProjectDTOWithId })
-  addProject(@Body() project: ProjectDTO): Promise<ProjectDTOWithId> {
+  @ApiBody({ type: [ProjectDTO] })
+  @ApiResponse({ type: [ProjectDTOWithId] })
+  addProject(@Body() project: ProjectDTO[]): Promise<ProjectDTOWithId[]> {
     return this.service.addProject(project);
   }
 

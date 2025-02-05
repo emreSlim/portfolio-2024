@@ -38,10 +38,14 @@ export class ExperienceService {
     return experiences.map((e) => this.mapExperienceFromEntity(e));
   }
 
-  async addExperience(experience: ExperienceDTO): Promise<ExperienceDTOWithId> {
-    const e = this.mapExperienceToEntity(experience);
-    await this.experienceRepo.save(e);
-    return this.mapExperienceFromEntity(e);
+  async addExperience(
+    experiences: ExperienceDTO[]
+  ): Promise<ExperienceDTOWithId[]> {
+    const mapped = experiences.map((experience) =>
+      this.mapExperienceToEntity(experience)
+    );
+    await this.experienceRepo.save(mapped);
+    return mapped.map((experience) => this.mapExperienceFromEntity(experience));
   }
 
   async updateExperience(

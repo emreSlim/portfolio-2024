@@ -14,9 +14,9 @@ export class SkillController {
   }
 
   @Post()
-  @ApiBody({ type: SkillDTO })
-  @ApiResponse({ type: SkillDTOWithId })
-  addSkill(@Body() skill: SkillDTO): Promise<SkillDTOWithId> {
+  @ApiBody({ type: [SkillDTO] })
+  @ApiResponse({ type: [SkillDTOWithId] })
+  addSkill(@Body() skill: SkillDTO[]): Promise<SkillDTOWithId[]> {
     return this.service.addSkill(skill);
   }
 
