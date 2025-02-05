@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Experience, experienceEntity } from 'src/entities';
 import { ExperienceDTO, ExperienceDTOWithId } from 'src/dtos';
-import { Repository } from '../json-db';
 
 @Injectable()
 export class ExperienceService {
-  private readonly experienceRepo = new Repository(experienceEntity);
+  private readonly experienceRepo = experienceEntity.repository;
 
   constructor() {}
 

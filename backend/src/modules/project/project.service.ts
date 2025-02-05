@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { ProjectDTO, ProjectDTOWithId } from 'src/dtos';
 import { Project, projectEntity } from 'src/entities';
-import { Repository } from '../json-db';
 
 @Injectable()
 export class ProjectService {
-  private readonly projectRepo = new Repository(projectEntity);
+  private readonly projectRepo = projectEntity.repository;
 
   constructor() {}
 

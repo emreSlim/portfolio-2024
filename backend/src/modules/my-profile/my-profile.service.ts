@@ -16,15 +16,13 @@ import {
   LocationDTOWithId,
   ProfessionalProfileDTOWithId,
 } from 'src/dtos';
-import { Repository } from '../json-db/repository';
 
 @Injectable()
 export class MyProfileService {
-  private readonly myProfileRepo = new Repository(myProfileEntity);
-  private readonly locationRepo = new Repository(locationEntity);
-  private readonly professionalProfileRepo = new Repository(
-    professionalProfileEntity
-  );
+  private readonly myProfileRepo = myProfileEntity.repository;
+  private readonly locationRepo = locationEntity.repository;
+  private readonly professionalProfileRepo =
+    professionalProfileEntity.repository;
 
   constructor() {}
 

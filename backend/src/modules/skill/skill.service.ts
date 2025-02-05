@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { SkillDTO, SkillDTOWithId } from 'src/dtos';
 import { Skill, skillEntity } from 'src/entities';
-import { Repository } from '../json-db';
 
 @Injectable()
 export class SkillService {
-  private readonly skillRepo = new Repository(skillEntity);
+  private readonly skillRepo = skillEntity.repository;
 
   constructor() {}
 
