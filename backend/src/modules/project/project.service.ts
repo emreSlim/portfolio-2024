@@ -1,15 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { ProjectDTO, ProjectDTOWithId } from 'src/dtos';
-import { Project } from 'src/entities';
-import { Repository } from 'typeorm';
+import { Project, projectEntity } from 'src/entities';
+import { Repository } from '../json-db';
 
 @Injectable()
 export class ProjectService {
-  constructor(
-    @InjectRepository(Project)
-    private readonly projectRepo: Repository<Project>
-  ) {}
+  private readonly projectRepo = new Repository(projectEntity);
+
+  constructor() {}
 
   mapProjectFromEntity(entity: Project): ProjectDTOWithId {
     return {
@@ -23,7 +21,7 @@ export class ProjectService {
     };
   }
 
-  mapProjectToEntity(dto: ProjectDTO, entity = new Project()): Project {
+  mapProjectToEntity(dto: ProjectDTO, entity = {} as Project): Project {
     entity.name = dto.name;
     entity.description = dto.description;
     entity.url = dto.url;
@@ -34,7 +32,7 @@ export class ProjectService {
   }
 
   async getAllProjects(): Promise<ProjectDTOWithId[]> {
-    const projects = await this.projectRepo.find();
+    const projects = await this.projectRepo.find({});
     return projects.map((p) => this.mapProjectFromEntity(p));
   }
 
@@ -46,7 +44,7 @@ export class ProjectService {
 
   async updateProject(project: ProjectDTOWithId): Promise<ProjectDTOWithId> {
     const p = await this.projectRepo.findOne({
-      where: { project_id: project.projectId },
+      project_id: project.projectId,
     });
 
     if (p == null) {

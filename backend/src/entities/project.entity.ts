@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column, ColumnType } from 'src/modules/json-db/';
 
 export type ProjectName = string & { readonly brand: unique symbol };
 export type ProjectDescription = string & { readonly brand: unique symbol };
@@ -7,30 +7,22 @@ export type ProjectMediaUrl = string & { readonly brand: unique symbol };
 export type ProjectSourceCodeUrl = string & { readonly brand: unique symbol };
 export type ProjectThumbnailUrl = string & { readonly brand: unique symbol };
 
-@Entity({
-  name: 'project',
-})
-export class Project {
-  @PrimaryGeneratedColumn({
-    type: 'int',
-  })
+export interface Project {
   project_id?: number;
-
-  @Column({ type: 'varchar', length: 50 })
   name: ProjectName;
-
-  @Column({ type: 'varchar', length: 2000 })
   description: ProjectDescription;
-
-  @Column({ type: 'varchar', length: 500 })
   url: ProjectUrl;
-
-  @Column({ type: 'varchar', length: 500 })
   media_url: ProjectMediaUrl;
-
-  @Column({ type: 'varchar', length: 500 })
   thumbnail_url: ProjectThumbnailUrl;
-
-  @Column({ type: 'varchar', length: 500 })
   source_code_url: ProjectSourceCodeUrl;
 }
+
+export const projectEntity = new Entity<Project>('project', [
+  new Column('project_id', ColumnType.SERIAL),
+  new Column('name', ColumnType.STRING),
+  new Column('description', ColumnType.STRING),
+  new Column('url', ColumnType.STRING),
+  new Column('media_url', ColumnType.STRING),
+  new Column('thumbnail_url', ColumnType.STRING),
+  new Column('source_code_url', ColumnType.STRING),
+]);

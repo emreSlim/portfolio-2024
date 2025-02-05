@@ -1,33 +1,25 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column, ColumnType } from 'src/modules/json-db/';
+import { myProfileEntity } from './my-profile.entity';
 
 export type Country = string & { readonly brand: unique symbol };
 export type City = string & { readonly brand: unique symbol };
 export type State = string & { readonly brand: unique symbol };
 export type LocationType = 'current' | 'permanent';
 
-@Entity({
-  name: 'location',
-})
-export class Location {
-  @PrimaryGeneratedColumn({
-    type: 'int',
-  })
+export interface Location {
   location_id?: number;
-
-  @Column({ type: 'varchar', length: 20 })
   city: City;
-
-  @Column({ type: 'varchar', length: 20 })
   state: State;
-
-  @Column({ type: 'varchar', length: 20 })
   country: Country;
-
-  @Column({ type: 'varchar', length: 20 })
   location_type: LocationType;
-
-  @Column({
-    type: 'int',
-  })
   my_profile_id: number;
 }
+
+export const locationEntity = new Entity<Location>('location', [
+  new Column('location_id', ColumnType.SERIAL),
+  new Column('city', ColumnType.STRING),
+  new Column('state', ColumnType.STRING),
+  new Column('country', ColumnType.STRING),
+  new Column('location_type', ColumnType.STRING),
+  new Column('my_profile_id', myProfileEntity),
+]);

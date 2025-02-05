@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
 import {
   Location,
+  locationEntity,
   MyProfile,
   myProfileEntity,
   ProfessionalProfile,
+  professionalProfileEntity,
 } from 'src/entities';
-import { InjectRepository } from '@nestjs/typeorm';
 import { GetMyProfile } from './my-profile.dto';
 import {
   LocationDTO,
@@ -16,23 +16,22 @@ import {
   LocationDTOWithId,
   ProfessionalProfileDTOWithId,
 } from 'src/dtos';
-import { Repository as JDBRepository } from '../json-db/repository';
+import { Repository } from '../json-db/repository';
 
 @Injectable()
 export class MyProfileService {
-  private readonly myProfileRepo = new JDBRepository(myProfileEntity);
+  private readonly myProfileRepo = new Repository(myProfileEntity);
+  private readonly locationRepo = new Repository(locationEntity);
+  private readonly professionalProfileRepo = new Repository(
+    professionalProfileEntity
+  );
 
-  constructor(
-    @InjectRepository(Location)
-    private readonly locationRepo: Repository<Location>,
-    @InjectRepository(ProfessionalProfile)
-    private readonly professionalProfileRepo: Repository<ProfessionalProfile>
-  ) {}
+  constructor() {}
 
   mapLocationDTOToEntity(
     dto: LocationDTO,
     myProfileId: number,
-    entity = new Location()
+    entity = {} as Location
   ): Location {
     entity.my_profile_id = myProfileId;
     entity.city = dto.city;
@@ -55,7 +54,7 @@ export class MyProfileService {
   mapProfessionalProfileDTOToEntity(
     dto: ProfessionalProfileDTO,
     myProfileId: number,
-    entity = new ProfessionalProfile()
+    entity = {} as ProfessionalProfile
   ): ProfessionalProfile {
     entity.my_profile_id = myProfileId;
     entity.platform_name = dto.platformName;
@@ -116,17 +115,19 @@ export class MyProfileService {
     query: GetMyProfile.Query
   ): Promise<MyProfileFullDTOWithId> {
     const mp = await this.myProfileRepo.findOne({
-      where: { my_profile_id: query.profileId },
+      my_profile_id: query.profileId,
     });
     if (mp == null) {
       throw new HttpException('Profile not found', HttpStatus.BAD_REQUEST);
     }
 
-    const lc = await this.locationRepo.findBy({
-      my_profile_id: query.profileId,
+    const lc = await this.locationRepo.find({
+      where: { my_profile_id: query.profileId },
     });
-    const pp = await this.professionalProfileRepo.findBy({
-      my_profile_id: query.profileId,
+    const pp = await this.professionalProfileRepo.find({
+      where: {
+        my_profile_id: query.profileId,
+      },
     });
 
     return this.mapProfileDTOFromEntity(mp, lc, pp);
@@ -156,7 +157,7 @@ export class MyProfileService {
 
   async updateMyProfile(body: MyProfileFullDTOWithId) {
     let mp = await this.myProfileRepo.findOne({
-      where: { my_profile_id: body.myProfileId },
+      my_profile_id: body.myProfileId,
     });
 
     if (mp == null) {

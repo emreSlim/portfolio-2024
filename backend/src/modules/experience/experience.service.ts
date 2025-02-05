@@ -1,15 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Experience } from 'src/entities';
-import { Repository } from 'typeorm';
+import { Experience, experienceEntity } from 'src/entities';
 import { ExperienceDTO, ExperienceDTOWithId } from 'src/dtos';
+import { Repository } from '../json-db';
 
 @Injectable()
 export class ExperienceService {
-  constructor(
-    @InjectRepository(Experience)
-    private readonly experienceRepo: Repository<Experience>
-  ) {}
+  private readonly experienceRepo = new Repository(experienceEntity);
+
+  constructor() {}
 
   mapExperienceFromEntity(entity: Experience): ExperienceDTOWithId {
     return {
@@ -24,7 +22,7 @@ export class ExperienceService {
 
   mapExperienceToEntity(
     dto: ExperienceDTO,
-    entity = new Experience()
+    entity = {} as Experience
   ): Experience {
     entity.organization = dto.organization;
     entity.designation = dto.designation;
@@ -50,7 +48,7 @@ export class ExperienceService {
   async updateExperience(
     experience: ExperienceDTOWithId
   ): Promise<ExperienceDTOWithId> {
-    const e = await this.experienceRepo.findOneBy({
+    const e = await this.experienceRepo.findOne({
       experience_id: experience.experienceId,
     });
 

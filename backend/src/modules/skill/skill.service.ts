@@ -44,7 +44,7 @@ export class SkillService {
 
   async updateSkill(skill: SkillDTOWithId): Promise<SkillDTOWithId> {
     const s = await this.skillRepo.findOne({
-      where: { skill_id: skill.skillId },
+      skill_id: skill.skillId,
     });
 
     if (!s) {
@@ -55,9 +55,7 @@ export class SkillService {
 
     await this.skillRepo.update(
       {
-        where: {
-          skill_id: s.skill_id,
-        },
+        skill_id: s.skill_id,
       },
       s
     );

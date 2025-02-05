@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column, ColumnType } from 'src/modules/json-db/';
 
 export type Organization = string & { readonly brand: unique symbol };
 export type Designation = string & { readonly brand: unique symbol };
@@ -6,27 +6,20 @@ export type StartingDate = Date & { readonly brand: unique symbol };
 export type EndingDate = Date & { readonly brand: unique symbol };
 export type WorkDescription = string & { readonly brand: unique symbol };
 
-@Entity({
-  name: 'experience',
-})
-export class Experience {
-  @PrimaryGeneratedColumn({
-    type: 'int',
-  })
+export interface Experience {
   experience_id?: number;
-
-  @Column({ type: 'varchar', length: 100 })
   organization: Organization;
-
-  @Column({ type: 'varchar', length: 100 })
   designation: Designation;
-
-  @Column({ type: 'date' })
   starting_date: StartingDate;
-
-  @Column({ type: 'date', nullable: true })
   ending_date: EndingDate;
-
-  @Column({ type: 'varchar', length: 1000 })
   work_description: WorkDescription;
 }
+
+export const experienceEntity = new Entity<Experience>('experience', [
+  new Column('experience_id', ColumnType.SERIAL),
+  new Column('organization', ColumnType.STRING),
+  new Column('designation', ColumnType.STRING),
+  new Column('starting_date', ColumnType.STRING),
+  new Column('ending_date', ColumnType.STRING),
+  new Column('work_description', ColumnType.STRING),
+]);

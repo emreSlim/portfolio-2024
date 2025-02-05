@@ -18,21 +18,27 @@ export class Repository<DataType> {
     return res + 1;
   }
 
-  async save(data: DataType): Promise<DataType> {
+  async save<T = DataType | DataType[]>(dataOrArray: T): Promise<T> {
+    const array = Array.isArray(dataOrArray) ? dataOrArray : [dataOrArray];
+
     const table = await JsonDB.getTable(this.entity.name);
 
-    this.entity.columns.forEach((column) => {
-      if (column.type == ColumnType.SERIAL) {
-        data[column.name] = this.getNextValueForColumn(
-          column.name,
-          table
-        ) as any;
-      }
-    });
+    for (const data of array) {
+      this.entity.columns.forEach((column) => {
+        if (column.type == ColumnType.SERIAL) {
+          data[column.name] = this.getNextValueForColumn(
+            column.name,
+            table
+          ) as any;
+        }
+      });
 
-    table.push(data);
+      table.push(data);
+    }
+
     JsonDB.saveTable(this.entity.name, table);
-    return data;
+
+    return dataOrArray;
   }
 
   async find({
@@ -61,7 +67,7 @@ export class Repository<DataType> {
     return res;
   }
 
-  async delete({ where }: { where: Partial<DataType> }): Promise<void> {
+  async delete(where: Partial<DataType>): Promise<void> {
     const table = await JsonDB.getTable(this.entity.name);
 
     if (Object.keys(where).length === 0) return;
@@ -73,11 +79,7 @@ export class Repository<DataType> {
     JsonDB.saveTable(this.entity.name, filtered);
   }
 
-  async findOne({
-    where,
-  }: {
-    where?: Partial<DataType>;
-  }): Promise<DataType | null> {
+  async findOne(where?: Partial<DataType>): Promise<DataType | null> {
     const table = await JsonDB.getTable(this.entity.name);
 
     return table.find((data: DataType) =>
@@ -86,7 +88,7 @@ export class Repository<DataType> {
   }
 
   async update(
-    { where }: { where: Partial<DataType> },
+    where: Partial<DataType>,
     data: Partial<DataType>
   ): Promise<DataType | null> {
     const table = await JsonDB.getTable(this.entity.name);

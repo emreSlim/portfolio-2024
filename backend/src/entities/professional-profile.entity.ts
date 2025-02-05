@@ -1,29 +1,22 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column, ColumnType } from 'src/modules/json-db/';
+import { myProfileEntity } from './my-profile.entity';
 
 export type URL = string & { readonly brand: unique symbol };
 export type PlatformName = string & { readonly brand: unique symbol };
 
-@Entity({
-  name: 'professional_profile',
-})
-export class ProfessionalProfile {
-  @PrimaryGeneratedColumn({ type: 'int' })
+export interface ProfessionalProfile {
   professional_profile_id?: number;
-
-  @Column({
-    type: 'varchar',
-    length: 20,
-  })
   platform_name: PlatformName;
-
-  @Column({
-    type: 'varchar',
-    length: 200,
-  })
   url: URL;
-
-  @Column({
-    type: 'int',
-  })
   my_profile_id: number;
 }
+
+export const professionalProfileEntity = new Entity<ProfessionalProfile>(
+  'professional_profile',
+  [
+    new Column('professional_profile_id', ColumnType.SERIAL),
+    new Column('platform_name', ColumnType.STRING),
+    new Column('url', ColumnType.STRING),
+    new Column('my_profile_id', myProfileEntity),
+  ]
+);
