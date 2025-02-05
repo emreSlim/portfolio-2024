@@ -1,0 +1,318 @@
+{
+  "skill": [
+    {
+      "name": "TypeScript",
+      "description": "Most of my JavaScript based work has been in TypeScript.",
+      "experience_in_month": 40,
+      "proficiency": 10,
+      "proficiency_level": "advance",
+      "skill_id": 1
+    },
+    {
+      "name": "JavaScript",
+      "description": "JavaScript is the programming language I had started with and worked with mostly.",
+      "experience_in_month": 46,
+      "proficiency": 9,
+      "proficiency_level": "advance",
+      "skill_id": 2
+    },
+    {
+      "name": "React js",
+      "description": "I have worked on serveral projects involving react.",
+      "experience_in_month": 44,
+      "proficiency": 9,
+      "proficiency_level": "advance",
+      "skill_id": 3
+    },
+    {
+      "name": "CSS",
+      "description": "I have worked on several projects using CSS.",
+      "experience_in_month": 46,
+      "proficiency": 9,
+      "proficiency_level": "advance",
+      "skill_id": 4
+    },
+    {
+      "name": "HTML",
+      "description": "I have worked on many frontend ReactJS, jQuery projects, which involved working with HTML.",
+      "experience_in_month": 46,
+      "proficiency": 9,
+      "proficiency_level": "advance",
+      "skill_id": 5
+    },
+    {
+      "name": "Data Structures and Algorithms",
+      "description": "I am fond of solving DSA problems.",
+      "experience_in_month": 46,
+      "proficiency": 9,
+      "proficiency_level": "advance",
+      "skill_id": 6
+    },
+    {
+      "name": "Nest js",
+      "description": "I have been recently working on NestJS projects.",
+      "experience_in_month": 18,
+      "proficiency": 9,
+      "proficiency_level": "advance",
+      "skill_id": 7
+    },
+    {
+      "name": "GIT",
+      "description": "I have good understanding of GIT version control system.",
+      "experience_in_month": 46,
+      "proficiency": 8,
+      "proficiency_level": "advance",
+      "skill_id": 8
+    },
+    {
+      "name": "React Native",
+      "description": "I have worked on several projects involving React Native.",
+      "experience_in_month": 24,
+      "proficiency": 8,
+      "proficiency_level": "advance",
+      "skill_id": 9
+    },
+    {
+      "name": "Java",
+      "description": "Java is my favorite programming language for solving DSA problems.",
+      "experience_in_month": 12,
+      "proficiency": 8,
+      "proficiency_level": "intermediate",
+      "skill_id": 10
+    },
+    {
+      "name": "ExpressJS",
+      "description": "Express JS is the NodeJS library I have used for building many small sized servers.",
+      "experience_in_month": 18,
+      "proficiency": 7,
+      "proficiency_level": "intermediate",
+      "skill_id": 11
+    },
+    {
+      "name": "AWS",
+      "description": "I have worked on Lambda functions (NodeJS), familiar with RDS, S3 and SQS",
+      "experience_in_month": 6,
+      "proficiency": 5,
+      "proficiency_level": "beginner",
+      "skill_id": 12
+    },
+    {
+      "name": "SQL",
+      "description": "I have worked with SQL for few projects.",
+      "experience_in_month": 3,
+      "proficiency": 3,
+      "proficiency_level": "beginner",
+      "skill_id": 13
+    },
+    {
+      "name": "Python(programming language)",
+      "description": "Python is one of the first programming language I learned.",
+      "experience_in_month": 2,
+      "proficiency": 3,
+      "proficiency_level": "beginner",
+      "skill_id": 14
+    },
+    {
+      "name": "Google Cloud",
+      "description": "I have used Google Cloud services in few of my projects. Services I am familiar with are firebase distribution, google analytics, google cloud run, google storage, google SQL, and google cloud build.",
+      "experience_in_month": 3,
+      "proficiency": 3,
+      "proficiency_level": "beginner",
+      "skill_id": 15
+    },
+    {
+      "name": "Bash",
+      "description": "I have completed a crash course of bash scripting.",
+      "experience_in_month": 2,
+      "proficiency": 2,
+      "proficiency_level": "beginner",
+      "skill_id": 16
+    },
+    {
+      "name": "SpringBoot",
+      "description": "SpringBoot is the java framework I am familiar with.",
+      "experience_in_month": 2,
+      "proficiency": 1,
+      "proficiency_level": "beginner",
+      "skill_id": 17
+    }
+  ],
+  "my_profile": [
+    {
+      "first_name": "Imran",
+      "last_name": "Qureshi",
+      "nick_name": "Emre",
+      "email": "emraanqureshi9@gmail.com",
+      "phone": "+91 7532 866 857",
+      "about": "Hi, I am Imran, from Noida, India. I am a self-taught full stack engineer started my journey in 2020 end. I started working as a software developer in starting months of 2021. Same year I started with academics in computer science field by joining University Of The People, California, USA as a student of Computer Science Associate Degree program.\nMy work focuses on building practical, user-centric solutions that solve real-world problems. Over the years, I’ve designed and developed a variety of systems, including web and mobile apps, web services, software packages, component libraries, and even games. I enjoy staying up-to-date with the latest technologies and continually challenging myself to learn and grow. I’m passionate about coding and love the process of turning ideas into functional, impactful software.",
+      "introduction": "I am a self-taught full stack software engineer with a passion for creating solutions that empower users to achieve their goals. With a sharp attention to detail, competitive problem solving and analytical skills, and a deep understanding of software development, I design and build diverse systems, including web apps, mobile apps, web services, software packages, component libraries, and games.",
+      "image_url": "https://storage.googleapis.com/portfolio-2024-imran/images/profile_image.jpg",
+      "my_profile_id": 1
+    }
+  ],
+  "location": [
+    {
+      "my_profile_id": 1,
+      "city": "Noida",
+      "country": "India",
+      "state": "Uttar Pradesh",
+      "location_type": "current",
+      "location_id": 4
+    },
+    {
+      "my_profile_id": 1,
+      "city": "Noida",
+      "country": "India",
+      "state": "Uttar Pradesh",
+      "location_type": "permanent",
+      "location_id": 5
+    }
+  ],
+  "professional_profile": [
+    {
+      "my_profile_id": 1,
+      "platform_name": "GitHub",
+      "url": "https://github.com/emreSlim",
+      "professional_profile_id": 4
+    },
+    {
+      "my_profile_id": 1,
+      "platform_name": "LeetCode",
+      "url": "https://leetcode.com/u/emreSlim/",
+      "professional_profile_id": 5
+    },
+    {
+      "my_profile_id": 1,
+      "platform_name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/imran-qureshi-92b822154/",
+      "professional_profile_id": 6
+    }
+  ],
+  "project": [
+    {
+      "name": "Drum Kit",
+      "description": "An online Drum Kit. Build using React JS.",
+      "url": "https://emres-drum-kit.netlify.app/",
+      "media_url": "https://storage.googleapis.com/portfolio-2024-imran/videos/drum-kit-demo.mp4",
+      "source_code_url": "https://github.com/emreSlim/Drum-Kit",
+      "thumbnail_url": "https://storage.googleapis.com/portfolio-2024-imran/images/drumkit.png",
+      "project_id": 1
+    },
+    {
+      "name": "Movinterest",
+      "description": "A mobile app for browsing all movies and trending movies. It is a React Native app using TMDB api.",
+      "url": null,
+      "media_url": "https://storage.googleapis.com/portfolio-2024-imran/videos/movinterest-demo.mp4",
+      "source_code_url": "https://github.com/emreSlim/movinterestNew",
+      "thumbnail_url": "https://storage.googleapis.com/portfolio-2024-imran/images/movinterest-screenshot.png",
+      "project_id": 2
+    },
+    {
+      "name": "Previewer",
+      "description": "An online editor and previewer supporting HTML and Markdown. It is built using jQuery.",
+      "url": "https://previewer.netlify.app/",
+      "media_url": "https://storage.googleapis.com/portfolio-2024-imran/videos/previewer-demo.mp4",
+      "source_code_url": "https://github.com/emreSlim/Markdown-Previewer",
+      "thumbnail_url": "https://storage.googleapis.com/portfolio-2024-imran/images/previewer.png",
+      "project_id": 3
+    },
+    {
+      "name": "SSUP (chatting app)",
+      "description": "SSUP is an online chatting app. I had built its client side using ReactJS with Bootstrap, and server side using express with SocketIO, while database used is MongoDB mongoose cloud.",
+      "url": "https://ssup-chat.netlify.app/",
+      "media_url": "https://storage.googleapis.com/portfolio-2024-imran/videos/ssup-demo.mp4",
+      "source_code_url": "https://github.com/emreSlim/ssup",
+      "thumbnail_url": "https://storage.googleapis.com/portfolio-2024-imran/images/ssup-screenshot.png",
+      "project_id": 4
+    },
+    {
+      "name": "To Do",
+      "description": "Todo is a mobile app for setting reminders. I have built it using React Native paired with Firebase notifications.",
+      "url": null,
+      "media_url": "https://storage.googleapis.com/portfolio-2024-imran/videos/todo-demo.mp4",
+      "source_code_url": "https://github.com/emreSlim/todo-list-android-app",
+      "thumbnail_url": "https://storage.googleapis.com/portfolio-2024-imran/images/todo.png",
+      "project_id": 5
+    },
+    {
+      "name": "Samsung Calculator",
+      "description": "A replica of Samsung android calculator. Built using React Native.",
+      "url": null,
+      "media_url": "https://storage.googleapis.com/portfolio-2024-imran/videos/calc-demo.mp4",
+      "source_code_url": "https://github.com/emreSlim/formula-calculator-android",
+      "thumbnail_url": "https://storage.googleapis.com/portfolio-2024-imran/images/calc.png",
+      "project_id": 6
+    },
+    {
+      "name": "Portfolio",
+      "description": "This portfolio app I have built using ReactJS in frontend, and NestJS and Postgres in backend. I have hosted the frontend in netlify while server, db, and storage are hosted on Google cloud.",
+      "url": "https://dev-imran.netlify.app/",
+      "media_url": "https://storage.googleapis.com/portfolio-2024-imran/videos/portfolio-demo.mp4",
+      "source_code_url": "https://github.com/emreSlim/portfolio-2024",
+      "thumbnail_url": "https://storage.googleapis.com/portfolio-2024-imran/images/portfolio.png",
+      "project_id": 7
+    },
+    {
+      "name": "Colliding Balls Simulation",
+      "description": "Colliding Balls Simulation is an NPM package I have created which demonstrates perfectly elastic collision and deflection of perfectly round objects of different sizes.",
+      "url": "https://www.npmjs.com/package/colliding-balls-simulation",
+      "media_url": "https://storage.googleapis.com/portfolio-2024-imran/videos/colliding-balls.mp4",
+      "source_code_url": "https://github.com/emreSlim/forces/tree/colliding-balls",
+      "thumbnail_url": "https://storage.googleapis.com/portfolio-2024-imran/images/colliding-balls.png",
+      "project_id": 8
+    },
+    {
+      "name": "Typesgenerator",
+      "description": "Typesgenerator is a typescript type utility NPM package and CLI. It can be used to generator types from JSON or JS objects.",
+      "url": "https://www.npmjs.com/package/typesgenerator",
+      "media_url": "https://storage.googleapis.com/portfolio-2024-imran/videos/typesgenerator.mp4",
+      "source_code_url": "https://github.com/emreSlim/typesgenerator",
+      "thumbnail_url": "https://storage.googleapis.com/portfolio-2024-imran/images/typesgenerator.png",
+      "project_id": 9
+    },
+    {
+      "name": "Tetris",
+      "description": "Tetris is a JavaScript game I have build which runs on HTML canvas.",
+      "url": "https://tetris-blocks.netlify.app/",
+      "media_url": "https://storage.googleapis.com/portfolio-2024-imran/videos/tetris.mp4",
+      "source_code_url": "https://github.com/emreSlim/tetris",
+      "thumbnail_url": "https://storage.googleapis.com/portfolio-2024-imran/images/tetris.png",
+      "project_id": 10
+    },
+    {
+      "name": "Archerman (Online Multiplayer)",
+      "description": "Archerman is an online multiplayer game I had developed as a learning and hobby project. I have used ReactJS and HTML canvas as frontend technologies, and Nodejs as backend technology. In frontend perspective, I have focused on rendering the objects on canvas frame by frame, using Algorithms involving Physics and Geometry. In backend perspective, I have focused on developing a peer-to-peer application networking layer using WebRTC, and a signalling server using http and WebSocket, both from scratch without help of packages. Both client-side app and server are hosted on free tier accounts of Netlify.com and Render.com respectively. Hence running the game may take up to 60 seconds for the first time in a while.",
+      "url": "https://archerman.netlify.app/",
+      "media_url": "https://storage.googleapis.com/portfolio-2024-imran/videos/archerman..mp4",
+      "source_code_url": "https://github.com/emreSlim/archer",
+      "thumbnail_url": "https://storage.googleapis.com/portfolio-2024-imran/images/archerman-screenshot.png",
+      "project_id": 11
+    }
+  ],
+  "experience": [
+    {
+      "organization": "Moback",
+      "designation": "Senior Software Engineer",
+      "starting_date": "2023-05-03",
+      "ending_date": null,
+      "work_description": "I worked as a frontend and backend senior engineer. I worked on several projects involving ReactJS, React Native, Nest JS, AWS Lambda.",
+      "experience_id": 1
+    },
+    {
+      "organization": "Moback",
+      "designation": "Software Engineer",
+      "starting_date": "2022-05-03",
+      "ending_date": "2023-05-02",
+      "work_description": "I worked as Fullstack engineer on several projects involving NestJS, ReactJS, React Native.",
+      "experience_id": 2
+    },
+    {
+      "organization": "Moback",
+      "designation": "Software Developer",
+      "starting_date": "2021-05-03",
+      "ending_date": "2022-05-02",
+      "work_description": "Worked as a software developer in frontend tasks using react, react native, angular. Worked as a software developer in frontend tasks using react, react native, angular",
+      "experience_id": 3
+    }
+  ]
+}
