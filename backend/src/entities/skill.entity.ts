@@ -1,4 +1,4 @@
-import { Entity, Column, ColumnType } from 'src/modules/json-db/';
+import { Entity, Column, ColumnType } from 'json-relational-db';
 
 export type SkillName = string & { readonly brand: unique symbol };
 export type SkillDescription = string & { readonly brand: unique symbol };

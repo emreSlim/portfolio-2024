@@ -1,4 +1,4 @@
-import { Entity, Column, ColumnType } from 'src/modules/json-db/';
+import { Entity, Column, ColumnType } from 'json-relational-db';
 import { myProfileEntity } from './my-profile.entity';
 
 export type Country = string & { readonly brand: unique symbol };
