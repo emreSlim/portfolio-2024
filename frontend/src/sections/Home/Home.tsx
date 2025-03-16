@@ -55,7 +55,7 @@ const HomeContent: React.FC<HomeContentProps> = ({ myProfile: mp }) => {
   return (
     <div className="home-content">
       <h1 className="title">
-        {mp.firstName} ({mp.nickName})
+        {mp.firstName} {mp.nickName ? `(${mp.nickName})` : ''}
       </h1>
       <p className="intro">{mp.introduction}</p>
       <ul className="profile-links">
