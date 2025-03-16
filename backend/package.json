@@ -29,7 +29,7 @@
     "@nestjs/swagger": "^7.4.2",
     "@nestjs/typeorm": "^10.0.2",
     "class-validator": "^0.14.1",
-    "json-relational-db": "^1.0.1",
+    "json-relational-db": "^1.0.3",
     "mysql2": "^3.11.3",
     "pg": "^8.13.0",
     "reflect-metadata": "^0.2.2",

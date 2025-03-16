@@ -33,7 +33,7 @@ export class ExperienceService {
 
   async getAllExperiences(): Promise<ExperienceDTOWithId[]> {
     const experiences = await this.experienceRepo.find({
-      order: { starting_date: 'DESC' },
+      orderBy: [{ column: 'starting_date', asc: false }],
     });
     return experiences.map((e) => this.mapExperienceFromEntity(e));
   }

@@ -113,23 +113,27 @@ export class MyProfileService {
     query: GetMyProfile.Query
   ): Promise<MyProfileFullDTOWithId> {
     const profileId = +query.profileId;
-    const mp = await this.myProfileRepo.findOne({
+    const myProfile = await this.myProfileRepo.findOne({
       my_profile_id: profileId,
     });
-    if (mp == null) {
+    if (myProfile == null) {
       throw new HttpException('Profile not found', HttpStatus.BAD_REQUEST);
     }
 
-    const lc = await this.locationRepo.find({
+    const location = await this.locationRepo.find({
       where: { my_profile_id: profileId },
     });
-    const pp = await this.professionalProfileRepo.find({
+    const professionalProfile = await this.professionalProfileRepo.find({
       where: {
         my_profile_id: profileId,
       },
     });
 
-    return this.mapProfileDTOFromEntity(mp, lc, pp);
+    return this.mapProfileDTOFromEntity(
+      myProfile,
+      location,
+      professionalProfile
+    );
   }
 
   async addMyProfile(body: MyProfileFullDTO): Promise<MyProfileFullDTOWithId> {
